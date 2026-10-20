@@ -1,0 +1,1241 @@
+body {
+  transition: background 0.5s ease, color 0.5s ease;
+  font-family: arial;
+  text-align: center;
+
+  background:
+    radial-gradient(
+      circle at 20% 10%,
+      rgba(255, 255, 255, 0.35),
+      transparent 28%
+    ),
+    linear-gradient(
+      135deg,
+      #9bc9a7,
+      #91a9d2
+    );
+}
+
+
+
+input {
+  padding: 10px;
+  width: 200px;
+}
+
+button {
+  padding: 10px;
+  cursor: pointer;
+}
+
+/* 3 pontos */
+.menu-container {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+}
+
+#menu-btn {
+  font-size: 20px;
+
+  width: 42px;
+  height: 42px;
+
+  padding: 0;
+
+  border: none;
+  border-radius: 50%;
+
+  cursor: pointer;
+
+  background: white;
+
+  color: #333;
+
+  box-shadow:
+    0 3px 10px rgba(0, 0, 0, 0.2);
+
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease,
+    color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+
+/* passar o mouse */
+
+#menu-btn:hover {
+  transform: rotate(90deg) scale(1.08);
+
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+
+/* clicar */
+
+#menu-btn:active {
+  transform: rotate(180deg) scale(0.92);
+}
+
+
+/* modo escuro */
+
+.dark-mode #menu-btn {
+  background: #1e1e1e;
+
+  color: white;
+
+  box-shadow:
+    0 3px 12px rgba(0, 0, 0, 0.6);
+}
+
+
+/* hover no modo escuro */
+
+.dark-mode #menu-btn:hover {
+  background: #292929;
+
+  box-shadow:
+    0 0 15px rgba(100, 180, 255, 0.35);
+}
+
+
+/* menu */
+#menu {
+  position: absolute;
+
+  top: 48px;
+  right: 0;
+
+  background: white;
+
+  padding: 12px;
+
+  border-radius: 15px;
+
+  box-shadow:
+    0 5px 20px rgba(0, 0, 0, 0.2);
+
+  transform-origin: top right;
+
+  animation: abrirMenu 0.25s ease;
+}
+
+
+@keyframes abrirMenu {
+
+  from {
+    opacity: 0;
+
+    transform:
+      scale(0.8)
+      translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      scale(1)
+      translateY(0);
+  }
+
+}
+
+
+/* esconder menu */
+.hidden {
+  display: none;
+}
+
+
+/* =========================================================
+   MODO ESCURO — FUNDO ESPACIAL
+   ========================================================= */
+
+.dark-mode {
+  position: relative;
+
+  background:
+    radial-gradient(
+      circle at 50% -10%,
+      rgba(55, 105, 180, 0.35),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at 10% 35%,
+      rgba(35, 100, 180, 0.16),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 90% 70%,
+      rgba(90, 45, 180, 0.13),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 50% 50%,
+      #111b2b 0%,
+      #090f1a 45%,
+      #050810 75%,
+      #020307 100%
+    );
+
+  min-height: 100vh;
+
+  color: white;
+
+  overflow-x: hidden;
+}
+
+
+/* =========================================================
+   NEBULOSAS
+   ========================================================= */
+
+.dark-mode::before {
+  content: "";
+
+  position: fixed;
+
+  inset: -20%;
+
+  pointer-events: none;
+
+  z-index: -3;
+
+  background:
+    radial-gradient(
+      ellipse at 20% 20%,
+      rgba(0, 180, 255, 0.10),
+      transparent 35%
+    ),
+    radial-gradient(
+      ellipse at 80% 30%,
+      rgba(120, 70, 255, 0.08),
+      transparent 35%
+    ),
+    radial-gradient(
+      ellipse at 50% 90%,
+      rgba(0, 130, 255, 0.07),
+      transparent 40%
+    );
+
+  filter: blur(45px);
+
+  animation: nebulosaMover 18s ease-in-out infinite alternate;
+}
+
+
+@keyframes nebulosaMover {
+
+  from {
+    transform:
+      scale(1)
+      translate3d(-1%, -1%, 0);
+  }
+
+  to {
+    transform:
+      scale(1.08)
+      translate3d(1%, 1%, 0);
+  }
+
+}
+
+
+/* =========================================================
+   RESULTADO NO MODO ESCURO
+   ========================================================= */
+
+.dark-mode #resultado {
+  background: #1e1e1e;
+}
+
+
+/* =========================================================
+   MENU
+   ========================================================= */
+
+.dark-mode #menu {
+  background: #1e1e1e;
+  color: white;
+}
+
+.dark-mode #menu label {
+  color: white;
+}
+
+#menu input {
+  margin-right: 8px;
+}
+
+.linha {
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.busca-container {
+  position: relative;
+}
+
+#busca {
+  position: relative;
+}
+
+.input-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.sugestoes {
+  position: absolute;
+  background: white;
+  width: 100%;
+  max-height: 150px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  left: 0;
+  top: 100%;
+  z-index: 999;
+}
+
+.sugestoes:empty {
+  display: none;
+}
+
+.sugestao-item {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.sugestao-item:hover {
+  background: #eee;
+}
+
+
+/* modo escuro */
+
+.dark-mode .sugestoes {
+  background: #1e1e1e;
+  color: white;
+  border: 1px solid #444;
+}
+
+.dark-mode .sugestao-item:hover {
+  background: #333;
+}
+
+#atomo {
+  position: relative;
+  width: 400px;
+  height: 400px;
+  margin: 30px auto;
+
+  top: -110px;
+
+  animation: surgirAtomo 0.6s ease;
+}
+
+
+/* =========================================================
+   NÚCLEO
+   ========================================================= */
+
+.nucleo {
+  position: absolute;
+
+  width: 40px;
+  height: 40px;
+
+  background: red;
+  border-radius: 50%;
+
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+
+  box-shadow: 
+    0 0 8px rgba(255, 0, 0, 0.7),
+    0 0 16px rgba(255, 0, 0, 0.4);
+}
+
+
+/* =========================================================
+   ÓRBITA
+   ========================================================= */
+
+.orbita {
+  position: absolute;
+  border: 2px solid gray;
+  border-radius: 50%;
+
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+}
+
+
+/* tamanhos */
+
+.orbita1 {
+  width: 120px;
+  height: 120px;
+}
+
+.orbita2 {
+  width: 200px;
+  height: 200px;
+}
+
+
+/* =========================================================
+   ELÉTRON
+   ========================================================= */
+
+.eletron {
+  width: 12px;
+  height: 12px;
+  background: cyan;
+  border-radius: 50%;
+
+  position: absolute;
+
+  box-shadow: 
+    0 0 6px rgba(0, 255, 255, 0.7),
+    0 0 12px rgba(0, 255, 255, 0.3);
+}
+
+
+.orbita {
+  animation-name: girar;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+
+@keyframes girar {
+
+  from {
+    transform:
+      translate(-50%, -50%)
+      rotate(0deg);
+  }
+
+  to {
+    transform:
+      translate(-50%, -50%)
+      rotate(360deg);
+  }
+
+}
+
+
+@keyframes surgirAtomo {
+
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+}
+
+
+/* =========================================================
+   ESTRELAS
+   ========================================================= */
+
+.estrelas {
+  position: fixed;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  pointer-events: none;
+
+  opacity: 0;
+
+  z-index: -1;
+
+  transition: opacity 0.8s ease;
+
+  background-image:
+    radial-gradient(2px 2px at 20px 30px, white, transparent),
+    radial-gradient(1px 1px at 40px 70px, white, transparent),
+    radial-gradient(2px 2px at 90px 40px, white, transparent),
+    radial-gradient(1px 1px at 130px 80px, white, transparent),
+    radial-gradient(2px 2px at 160px 30px, white, transparent),
+    radial-gradient(1px 1px at 200px 120px, white, transparent),
+    radial-gradient(2px 2px at 250px 50px, white, transparent),
+    radial-gradient(1px 1px at 300px 150px, white, transparent),
+    radial-gradient(2px 2px at 350px 90px, white, transparent),
+    radial-gradient(1px 1px at 420px 40px, white, transparent),
+    radial-gradient(2px 2px at 470px 170px, white, transparent),
+    radial-gradient(1px 1px at 520px 100px, white, transparent);
+
+  background-repeat: repeat;
+
+  background-size: 550px 220px;
+
+  animation:
+    estrelasMover 80s linear infinite,
+    piscarEstrelas 5s ease-in-out infinite alternate;
+}
+
+
+/* =========================================================
+   ESTRELAS NO MODO ESCURO
+   ========================================================= */
+
+.dark-mode .estrelas {
+  opacity: 0.55;
+}
+
+
+/* =========================================================
+   BRILHO DAS ESTRELAS
+   ========================================================= */
+
+@keyframes piscarEstrelas {
+
+  0% {
+    opacity: 0.25;
+  }
+
+  25% {
+    opacity: 0.55;
+  }
+
+  50% {
+    opacity: 0.35;
+  }
+
+  75% {
+    opacity: 0.75;
+  }
+
+  100% {
+    opacity: 0.4;
+  }
+
+}
+
+
+/* =========================================================
+   MOVIMENTO LENTO DAS ESTRELAS
+   ========================================================= */
+
+@keyframes estrelasMover {
+
+  from {
+    background-position:
+      0 0;
+  }
+
+  to {
+    background-position:
+      550px 220px;
+  }
+
+}
+
+
+/* =========================================================
+   ÁREA DA PESQUISA
+   ========================================================= */
+
+.area-pesquisa {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 10px;
+
+  position: relative;
+}
+
+
+/* =========================================================
+   RESULTADO
+   ========================================================= */
+
+#resultado {
+  width: 260px;
+
+  min-height: 120px;
+
+  padding: 20px;
+
+  box-sizing: border-box;
+
+  background: white;
+
+  border-radius: 10px;
+
+  text-align: center;
+
+  box-shadow:
+    0 4px 15px rgba(0, 0, 0, 0.15);
+
+  visibility: hidden;
+
+  opacity: 0;
+
+  transform: translateX(-10px);
+
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+
+  position: relative;
+  top: 90px;
+  left: 80px;
+}
+
+
+/* Quando tiver resultado */
+
+#resultado:not(:empty) {
+  visibility: visible;
+
+  opacity: 1;
+
+  transform: translateX(0);
+}
+
+
+/* =========================================================
+   TÍTULO DO ELEMENTO
+   ========================================================= */
+
+#resultado h2 {
+  margin-top: 0;
+
+  margin-bottom: 15px;
+
+  color: #333;
+}
+
+
+/* =========================================================
+   TEXTOS
+   ========================================================= */
+
+#resultado p {
+  margin: 7px 0;
+
+  color: #444;
+}
+
+
+/* =========================================================
+   MODO ESCURO — RESULTADO
+   ========================================================= */
+
+.dark-mode #resultado {
+  background: #1e1e1e;
+
+  color: white;
+
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+
+.dark-mode #resultado h2 {
+  color: white;
+}
+
+
+.dark-mode #resultado p {
+  color: #ddd;
+}
+
+
+/* =========================================================
+   BOTÃO DE MODO ESCURO
+   ========================================================= */
+
+/* =========================================================
+   CONTROLE DO MODO ESCURO
+   ========================================================= */
+
+.dark-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+
+  min-width: 180px;
+
+  cursor: pointer;
+  user-select: none;
+}
+
+
+/* texto */
+
+.toggle-text {
+  font-size: 14px;
+  font-weight: 600;
+
+  color: #333;
+
+  transition: color 0.4s ease;
+}
+
+
+/* esconder checkbox original */
+
+.dark-toggle input {
+  position: absolute;
+
+  opacity: 0;
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   INTERRUPTOR
+   ========================================================= */
+
+.toggle-slider {
+  position: relative;
+
+  width: 58px;
+  height: 30px;
+
+  flex-shrink: 0;
+
+  border-radius: 30px;
+
+  background: linear-gradient(
+    135deg,
+    #87ceeb,
+    #5dade2
+  );
+
+  box-shadow:
+    inset 0 2px 5px rgba(0, 0, 0, 0.2);
+
+  transition:
+    background 0.5s ease,
+    box-shadow 0.5s ease,
+    transform 0.2s ease;
+}
+
+
+/* =========================================================
+   BOLINHA
+   ========================================================= */
+
+.toggle-circle {
+  position: absolute;
+
+  width: 24px;
+  height: 24px;
+
+  top: 3px;
+  left: 3px;
+
+  border-radius: 50%;
+
+  background: white;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  box-shadow:
+    0 2px 5px rgba(0, 0, 0, 0.3);
+
+  overflow: hidden;
+
+  transition:
+    transform 0.45s cubic-bezier(
+      0.68,
+      -0.55,
+      0.27,
+      1.55
+    );
+}
+
+
+/* =========================================================
+   ÍCONES
+   ========================================================= */
+
+.sol,
+.lua {
+  position: absolute;
+
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  font-size: 13px;
+
+  line-height: 1;
+
+  transition:
+    opacity 0.3s ease,
+    transform 0.4s ease;
+}
+
+
+/* sol inicialmente */
+
+.sol {
+  opacity: 1;
+
+  transform:
+    rotate(0deg)
+    scale(1);
+}
+
+
+/* lua inicialmente escondida */
+
+.lua {
+  opacity: 0;
+
+  transform:
+    rotate(-90deg)
+    scale(0.5);
+}
+
+
+/* =========================================================
+   MODO ESCURO
+   ========================================================= */
+
+.dark-toggle input:checked + .toggle-slider {
+  background: linear-gradient(
+    135deg,
+    #1b2735,
+    #090a0f
+  );
+
+  box-shadow:
+    inset 0 2px 6px rgba(0, 0, 0, 0.6),
+    0 0 8px rgba(100, 180, 255, 0.3);
+}
+
+
+/* mover bolinha */
+
+.dark-toggle input:checked
++ .toggle-slider
++ .toggle-circle {
+  transform: translateX(28px);
+}
+
+
+/* =========================================================
+   CORREÇÃO IMPORTANTE
+   ========================================================= */
+
+/* Como a bolinha está DENTRO do slider,
+   usamos este seletor: */
+
+.dark-toggle input:checked
++ .toggle-slider
+.toggle-circle {
+
+  transform: translateX(28px);
+}
+
+
+/* esconder sol */
+
+.dark-toggle input:checked
++ .toggle-slider
+.toggle-circle
+.sol {
+
+  opacity: 0;
+
+  transform:
+    rotate(90deg)
+    scale(0.5);
+}
+
+
+/* mostrar lua */
+
+.dark-toggle input:checked
++ .toggle-slider
+.toggle-circle
+.lua {
+
+  opacity: 1;
+
+  transform:
+    rotate(0deg)
+    scale(1);
+}
+
+
+/* =========================================================
+   TEXTO NO MODO ESCURO
+   ========================================================= */
+
+.dark-mode .toggle-text {
+  color: white;
+}
+
+
+/* =========================================================
+   HOVER
+   ========================================================= */
+
+.dark-toggle:hover .toggle-slider {
+  transform: scale(1.05);
+
+  box-shadow:
+    0 0 12px rgba(100, 180, 255, 0.35);
+}
+
+
+/* =========================================================
+   CLIQUE
+   ========================================================= */
+
+.dark-toggle:active .toggle-slider {
+  transform: scale(0.95);
+}
+
+/* =========================================================
+   BOTÃO BUSCAR — VISUAL MODERNO
+   ========================================================= */
+
+.area-pesquisa button {
+  border: none;
+  border-radius: 10px;
+
+  padding: 10px 18px;
+
+  color: white;
+  font-weight: bold;
+
+  background: linear-gradient(
+    135deg,
+    #3f9b68,
+    #4c83b8
+  );
+
+  box-shadow:
+    0 4px 10px rgba(40, 90, 100, 0.25);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.3s ease;
+}
+
+
+/* passar o mouse */
+
+.area-pesquisa button:hover {
+  transform: translateY(-2px);
+
+  background: linear-gradient(
+    135deg,
+    #48aa73,
+    #5794ca
+  );
+
+  box-shadow:
+    0 7px 16px rgba(40, 90, 100, 0.32);
+}
+
+
+/* clicar */
+
+.area-pesquisa button:active {
+  transform: translateY(1px) scale(0.96);
+
+  box-shadow:
+    0 2px 6px rgba(40, 90, 100, 0.25);
+}
+
+
+
+/* =========================================================
+   BOTÕES REDONDOS AO LADO DOS TRÊS PONTINHOS
+   ========================================================= */
+
+.botoes-extras {
+  position: fixed;
+  top: 10px;
+  right: 62px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+
+  z-index: 1000;
+}
+
+.botao-extra {
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+  min-height: 42px;
+
+  padding: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  border-radius: 50%;
+
+  background: white;
+  color: #333;
+
+  font-size: 20px;
+  cursor: pointer;
+
+  box-shadow:
+    0 3px 10px rgba(0, 0, 0, 0.2);
+
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease,
+    color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.botao-extra:hover {
+  transform: rotate(8deg) scale(1.08);
+
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.botao-extra:active {
+  transform: scale(0.92);
+}
+
+/* Curiosidade química */
+#curiosidade-btn {
+  color: #e5a000;
+}
+
+#curiosidade-btn:hover {
+  background: #fff7dc;
+
+  box-shadow:
+    0 0 15px rgba(255, 193, 7, 0.4);
+}
+
+/* Favoritos */
+#favoritos-btn {
+  color: #e74c6f;
+}
+
+#favoritos-btn:hover {
+  background: #fff0f3;
+
+  box-shadow:
+    0 0 15px rgba(231, 76, 111, 0.4);
+}
+
+/* Modo escuro */
+.dark-mode .botao-extra {
+  background: #1e1e1e;
+  box-shadow:
+    0 3px 12px rgba(0, 0, 0, 0.6);
+}
+
+.dark-mode #curiosidade-btn {
+  color: #ffd166;
+}
+
+.dark-mode #favoritos-btn {
+  color: #ff7795;
+}
+
+
+/* =========================================================
+   BOTÕES SUPERIORES — CURIOSIDADES E FAVORITOS
+   ========================================================= */
+
+.botoes-superiores {
+  position: fixed;
+  top: 10px;
+  right: 62px;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  z-index: 1000;
+}
+
+.botao-superior {
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+  min-height: 42px;
+
+  padding: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  border-radius: 50%;
+
+  background: white;
+  color: #333;
+
+  font-size: 20px;
+  cursor: pointer;
+
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.botao-superior:hover {
+  transform: scale(1.08);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.botao-superior:active {
+  transform: scale(0.92);
+}
+
+/* Cores dos botões */
+
+#curiosidade-btn {
+  color: #e5a000;
+}
+
+#curiosidade-btn:hover {
+  background: #fff7dc;
+}
+
+#favoritos-btn {
+  color: #e74c6f;
+}
+
+#favoritos-btn:hover {
+  background: #fff0f3;
+}
+
+/* Modo escuro */
+
+.dark-mode .botao-superior {
+  background: #1e1e1e;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.6);
+}
+
+.dark-mode #curiosidade-btn {
+  color: #ffd166;
+}
+
+.dark-mode #favoritos-btn {
+  color: #ff7795;
+}
+
+/* Celulares */
+
+@media (max-width: 480px) {
+  .botoes-superiores {
+    right: 58px;
+    gap: 5px;
+  }
+
+  .botao-superior {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+    min-height: 38px;
+    font-size: 18px;
+  }
+}
+
+.painel-superior {
+  position: fixed;
+  top: 65px;
+  right: 10px;
+  width: min(320px, calc(100vw - 40px));
+  max-height: 70vh;
+  overflow-y: auto;
+  box-sizing: border-box;
+  padding: 18px;
+  border-radius: 15px;
+  background: white;
+  color: #333;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+  z-index: 1001;
+  text-align: left;
+}
+
+.painel-superior h3 {
+  margin-top: 0;
+}
+
+.painel-superior button {
+  margin-top: 8px;
+  border: none;
+  border-radius: 8px;
+  padding: 9px 12px;
+  cursor: pointer;
+}
+
+.dark-mode .painel-superior {
+  background: #1e1e1e;
+  color: white;
+}
+
+.favorito-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.favorito-item button:first-child {
+  flex: 1;
+  text-align: left;
+}
