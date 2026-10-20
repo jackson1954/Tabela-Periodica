@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Tabela Peiódica</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<div class="estrelas"></div>
+  <h1>Tabela Periódica</h1>
+
+<div class="linha"></div>
+
+  <div class="busca-resultado">
+
+  <div class="area-pesquisa">
+
+    <div class="input-wrapper">
+      <input
+        type="text"
+        id="busca"
+        placeholder="Qual elemento você procura?"
+      >
+
+      <div id="sugestoes" class="sugestoes"></div>
+    </div>
+
+    <button onclick="buscarElemento()">buscar</button>
+
+  </div>
+
+  <div id="resultado"></div>
+
+</div>
+
+
+<div class="menu-container">
+  <button id="menu-btn">⋮</button>
+
+  <div id="menu" class="hidden">
+    <label class="dark-toggle">
+
+      <span class="toggle-text">
+        Modo escuro
+      </span>
+
+      <input type="checkbox" id="darkToggle">
+
+      <span class="toggle-slider">
+        <span class="toggle-circle">
+          <span class="sol">☀️</span>
+          <span class="lua">🌙</span>
+        </span>
+      </span>
+
+    </label>
+  </div>
+</div>
+
+
+<!-- NOVOS BOTÕES -->
+<div class="botoes-superiores">
+
+  <button
+    id="curiosidade-btn"
+    class="botao-superior"
+    aria-label="Curiosidade química"
+    title="Curiosidade química"
+  >
+    <span class="icone-curiosidade">✦</span>
+  </button>
+
+  <button
+    id="favoritos-btn"
+    class="botao-superior"
+    aria-label="Favoritos"
+    title="Favoritos"
+  >
+    <span class="icone-favoritos">☆</span>
+  </button>
+
+</div>
+
+
+<!-- PAINEL DE CURIOSIDADES -->
+<div id="painel-curiosidade" class="painel-superior hidden">
+
+  <h3>✨ Curiosidade química</h3>
+
+  <p id="texto-curiosidade"></p>
+
+  <button id="outra-curiosidade">
+    Outra curiosidade
+  </button>
+
+</div>
+
+
+<!-- PAINEL DE FAVORITOS -->
+<div id="painel-favoritos" class="painel-superior hidden">
+
+  <h3>☆ Meus favoritos</h3>
+
+  <p id="aviso-favoritos">
+    Pesquise um elemento e salve-o nos favoritos.
+  </p>
+
+  <button id="salvar-atual" class="salvar-atual">
+    ☆ Salvar elemento atual
+  </button>
+
+  <div id="lista-favoritos"></div>
+
+</div>
+
+
+<div id="atomo"></div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
