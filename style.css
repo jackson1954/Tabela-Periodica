@@ -1239,3 +1239,233 @@ button {
   flex: 1;
   text-align: left;
 }
+
+
+/* ==========================================
+   ADAPTAÇÃO PARA CELULARES E TABLETS
+   ========================================== */
+
+/* Evita que elementos ultrapassem a tela */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  width: 100%;
+  overflow-x: clip;
+}
+
+body {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 75px 16px 20px;
+  overflow-x: clip;
+}
+
+/* Título */
+h1 {
+  font-size: clamp(1.7rem, 6vw, 2.5rem);
+  margin: 12px 0 20px;
+  overflow-wrap: anywhere;
+}
+
+/* Pesquisa */
+.busca-resultado {
+  width: 100%;
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+.area-pesquisa {
+  width: 100%;
+  gap: 8px;
+}
+
+.input-wrapper {
+  flex: 1;
+  min-width: 0;
+}
+
+#busca {
+  width: 100%;
+  min-width: 0;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #aaa;
+  border-radius: 10px;
+}
+
+.area-pesquisa button {
+  flex-shrink: 0;
+  min-height: 44px;
+}
+
+/* Sugestões */
+.sugestoes {
+  box-sizing: border-box;
+  text-align: left;
+  max-height: 220px;
+}
+
+.sugestao-item {
+  padding: 12px;
+}
+
+/* Resultado: remove o posicionamento que causa
+   desalinhamento em telas estreitas */
+#resultado {
+  position: static;
+  width: 100%;
+  max-width: 360px;
+  min-height: 0;
+  margin: 20px auto;
+  padding: 18px;
+  overflow-wrap: anywhere;
+}
+
+/* Átomo */
+#atomo {
+  width: min(100%, 400px);
+  height: auto;
+  aspect-ratio: 1;
+  margin: 20px auto;
+  top: 0;
+}
+
+/* Botões superiores */
+.botoes-superiores {
+  top: 10px;
+  right: 60px;
+  gap: 6px;
+}
+
+.botao-superior,
+#menu-btn {
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+  min-height: 42px;
+}
+
+/* Painéis de curiosidades e favoritos */
+.painel-superior {
+  top: 62px;
+  right: 8px;
+  width: min(340px, calc(100vw - 16px));
+  max-height: calc(100dvh - 80px);
+  padding: 16px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.painel-superior button {
+  min-height: 42px;
+}
+
+/* Menu */
+#menu {
+  max-width: calc(100vw - 20px);
+}
+
+/* ==========================================
+   CELULARES
+   ========================================== */
+
+@media (max-width: 480px) {
+  body {
+    padding: 68px 12px 16px;
+  }
+
+  h1 {
+    font-size: 1.7rem;
+    margin-top: 18px;
+  }
+
+  .area-pesquisa {
+    gap: 6px;
+  }
+
+  #busca {
+    padding: 11px 9px;
+  }
+
+  .area-pesquisa button {
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+
+  #resultado {
+    max-width: 100%;
+  }
+
+  #atomo {
+    width: min(100%, 340px);
+  }
+
+  .botoes-superiores {
+    right: 58px;
+    gap: 4px;
+  }
+
+  .botao-superior,
+  #menu-btn {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+    min-height: 38px;
+  }
+
+  .painel-superior {
+    font-size: 15px;
+  }
+
+  .favorito-item {
+    align-items: stretch;
+  }
+
+  .favorito-item button {
+    min-height: 42px;
+  }
+}
+
+/* Celulares muito estreitos */
+@media (max-width: 350px) {
+  body {
+    padding-right: 8px;
+    padding-left: 8px;
+  }
+
+  h1 {
+    font-size: 1.45rem;
+  }
+
+  .botoes-superiores {
+    right: 54px;
+    gap: 2px;
+  }
+
+  .botao-superior,
+  #menu-btn {
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+    min-height: 34px;
+  }
+
+  .area-pesquisa button {
+    padding: 10px 8px;
+  }
+}
+
+/* Respeita a preferência por menos animações */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
