@@ -1,124 +1,283 @@
 
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8" />
-  <title>Tabela Peiódica</title>
-  <link rel="stylesheet" href="style.css"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Tabela Periódica</title>
+
+  <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
 
-<div class="estrelas"></div>
+  <!-- ESTRELAS DO MODO ESCURO -->
+  <div class="estrelas"></div>
+
+  <!-- TÍTULO -->
   <h1>Tabela Periódica</h1>
 
-<div class="linha"></div>
+  <div class="linha"></div>
 
+  <!-- PESQUISA E VISUALIZAÇÃO -->
   <div class="busca-resultado">
 
-  <div class="area-pesquisa">
+    <!-- ÁREA DE PESQUISA -->
+    <div class="area-pesquisa">
 
-    <div class="input-wrapper">
-      <input
-        type="text"
-        id="busca"
-        placeholder="Qual elemento você procura?"
-      >
+      <div class="input-wrapper">
 
-      <div id="sugestoes" class="sugestoes"></div>
+        <input
+          type="text"
+          id="busca"
+          placeholder="Qual elemento você procura?"
+          autocomplete="off"
+        />
+
+        <div
+          id="sugestoes"
+          class="sugestoes">
+        </div>
+
+      </div>
+
+      <button onclick="buscarElemento()">
+        Buscar
+      </button>
+
     </div>
 
-    <button onclick="buscarElemento()">buscar</button>
+    <!-- VISUALIZAÇÃO DO ELEMENTO -->
+    <div class="visualizacao-elemento">
+
+      <!-- INFORMAÇÕES PRINCIPAIS À ESQUERDA -->
+      <div id="resultado"></div>
+
+      <!-- MODELO DO ÁTOMO -->
+      <div id="atomo"></div>
+
+    </div>
 
   </div>
 
-  <div id="resultado"></div>
+  <!-- MENU DE CONFIGURAÇÕES -->
+  <div class="menu-container">
 
-</div>
+    <button id="menu-btn">
+      ⋮
+    </button>
 
+    <div id="menu" class="hidden">
 
-<div class="menu-container">
-  <button id="menu-btn">⋮</button>
+      <label class="dark-toggle">
 
-  <div id="menu" class="hidden">
-    <label class="dark-toggle">
-
-      <span class="toggle-text">
-        Modo escuro
-      </span>
-
-      <input type="checkbox" id="darkToggle">
-
-      <span class="toggle-slider">
-        <span class="toggle-circle">
-          <span class="sol">☀️</span>
-          <span class="lua">🌙</span>
+        <span class="toggle-text">
+          Modo escuro
         </span>
+
+        <input
+          type="checkbox"
+          id="darkToggle"
+        />
+
+        <span class="toggle-slider">
+
+          <span class="toggle-circle">
+
+            <span class="sol">☀️</span>
+            <span class="lua">🌙</span>
+
+          </span>
+
+        </span>
+
+      </label>
+
+    </div>
+
+  </div>
+
+  <!-- BOTÕES SUPERIORES -->
+  <div class="botoes-superiores">
+
+    <!-- CURIOSIDADES -->
+    <button
+      id="curiosidade-btn"
+      class="botao-superior"
+      aria-label="Curiosidade química"
+      title="Curiosidade química"
+    >
+
+      <span class="icone-curiosidade">
+        ✦
       </span>
 
-    </label>
+    </button>
+
+    <!-- FAVORITOS -->
+    <button
+      id="favoritos-btn"
+      class="botao-superior"
+      aria-label="Favoritos"
+      title="Favoritos"
+    >
+
+      <span class="icone-favoritos">
+        ☆
+      </span>
+
+    </button>
+
   </div>
-</div>
 
-
-<!-- NOVOS BOTÕES -->
-<div class="botoes-superiores">
-
-  <button
-    id="curiosidade-btn"
-    class="botao-superior"
-    aria-label="Curiosidade química"
-    title="Curiosidade química"
+  <!-- PAINEL DE CURIOSIDADES -->
+  <div
+    id="painel-curiosidade"
+    class="painel-superior hidden"
   >
-    <span class="icone-curiosidade">✦</span>
-  </button>
 
-  <button
-    id="favoritos-btn"
-    class="botao-superior"
-    aria-label="Favoritos"
-    title="Favoritos"
+    <h3>✨ Curiosidade química</h3>
+
+    <p id="texto-curiosidade"></p>
+
+    <button id="outra-curiosidade">
+      Outra curiosidade
+    </button>
+
+  </div>
+
+  <!-- PAINEL DE FAVORITOS -->
+  <div
+    id="painel-favoritos"
+    class="painel-superior hidden"
   >
-    <span class="icone-favoritos">☆</span>
-  </button>
 
-</div>
+    <h3>☆ Meus favoritos</h3>
 
+    <p id="aviso-favoritos">
+      Pesquise um elemento e salve-o nos favoritos.
+    </p>
 
-<!-- PAINEL DE CURIOSIDADES -->
-<div id="painel-curiosidade" class="painel-superior hidden">
+    <button
+      id="salvar-atual"
+      class="salvar-atual"
+    >
+      ☆ Salvar elemento atual
+    </button>
 
-  <h3>✨ Curiosidade química</h3>
+    <div id="lista-favoritos"></div>
 
-  <p id="texto-curiosidade"></p>
+  </div>
 
-  <button id="outra-curiosidade">
-    Outra curiosidade
-  </button>
+  <!-- ================================================= -->
+  <!-- JANELA DE MAIS DETALHES -->
+  <!-- ================================================= -->
 
-</div>
+  <div
+    id="modal-detalhes"
+    class="detalhes-modal hidden"
+  >
 
+    <div class="detalhes-conteudo">
 
-<!-- PAINEL DE FAVORITOS -->
-<div id="painel-favoritos" class="painel-superior hidden">
+      <!-- BOTÃO FECHAR -->
+      <button
+        id="fechar-detalhes"
+        class="fechar-detalhes"
+        aria-label="Fechar detalhes"
+        title="Fechar"
+      >
+        ✕
+      </button>
 
-  <h3>☆ Meus favoritos</h3>
+      <!-- NOME DO ELEMENTO -->
+      <h2 id="detalhe-nome">
+        Elemento
+      </h2>
 
-  <p id="aviso-favoritos">
-    Pesquise um elemento e salve-o nos favoritos.
-  </p>
+      <!-- SÍMBOLO QUÍMICO -->
+      <div
+        class="detalhe-simbolo"
+        id="detalhe-simbolo"
+      >
+        --
+      </div>
 
-  <button id="salvar-atual" class="salvar-atual">
-    ☆ Salvar elemento atual
-  </button>
+      <!-- INFORMAÇÕES PRINCIPAIS -->
+      <div class="detalhes-grade">
 
-  <div id="lista-favoritos"></div>
+        <div class="detalhe-card">
 
-</div>
+          <span>
+            Número atômico
+          </span>
 
+          <strong id="detalhe-numero">
+            --
+          </strong>
 
-<div id="atomo"></div>
+        </div>
 
-<script src="script.js"></script>
+        <div class="detalhe-card">
+
+          <span>
+            Massa atômica
+          </span>
+
+          <strong id="detalhe-massa">
+            --
+          </strong>
+
+        </div>
+
+        <div class="detalhe-card">
+
+          <span>
+            Prótons
+          </span>
+
+          <strong id="detalhe-protons">
+            --
+          </strong>
+
+        </div>
+
+        <div class="detalhe-card">
+
+          <span>
+             Classificação
+            </span>
+
+           <strong id="detalhe-eletrons">
+              --
+            </strong>
+
+        </div>
+
+      </div>
+
+      <!-- ESPAÇO PARA FUTURAS INFORMAÇÕES -->
+      <div class="detalhes-futuro">
+
+        <h3>
+          Outras informações
+        </h3>
+
+        <p>
+          Novas informações químicas serão adicionadas aqui.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- JAVASCRIPT -->
+  <script src="dados-elementos.js"></script>
+  <script src="script.js"></script>
 
 </body>
 </html>
